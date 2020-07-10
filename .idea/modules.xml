@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Leaderboard/Leaderboard.iml" filepath="$PROJECT_DIR$/Leaderboard/Leaderboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TelemetrySystem/TelemetrySystem.iml" filepath="$PROJECT_DIR$/TelemetrySystem/TelemetrySystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TextConverter/TextConverter.iml" filepath="$PROJECT_DIR$/TextConverter/TextConverter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TirePressureMonitoringSystem/TirePressureMonitoringSystem.iml" filepath="$PROJECT_DIR$/TirePressureMonitoringSystem/TirePressureMonitoringSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TurnTicketDispenser/TurnTicketDispenser.iml" filepath="$PROJECT_DIR$/TurnTicketDispenser/TurnTicketDispenser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/racing-car-katas-JAVA.iml" filepath="$PROJECT_DIR$/racing-car-katas-JAVA.iml" />
+    </modules>
+  </component>
+</project>
