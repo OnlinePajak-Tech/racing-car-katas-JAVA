@@ -12,7 +12,7 @@ public class TelemetryDiagnosticControlsTest {
     @Test
     public void checkTransmission_should_send_a_diagnostic_message_and_receive_a_status_message_response() throws Exception {
         // Given
-        var mockTelemetryClient = Mockito.mock(TelemetryClient.class);
+        var mockTelemetryClient = Mockito.mock(ITelemetryClient.class);
 
         var expectedDiagnosticMessage = "Blah";
 
@@ -23,17 +23,17 @@ public class TelemetryDiagnosticControlsTest {
         var control = new TelemetryDiagnosticControls(mockTelemetryClient);
 
         // When
-        control.checkTransmission();
+        var result = control.checkTransmission();
 
         // Then
-        Assertions.assertEquals(expectedDiagnosticMessage, control.getDiagnosticInfo());
+        Assertions.assertEquals(expectedDiagnosticMessage, result.getInfo());
         verify(mockTelemetryClient).send("AT#UD");
     }
 
     @Test
     public void checkTransmission_should_throw_an_exception_when_status_is_not_online_after_retry() {
         // Given
-        var mockTelemetryClient = Mockito.mock(TelemetryClient.class);
+        var mockTelemetryClient = Mockito.mock(ITelemetryClient.class);
 
         when(mockTelemetryClient.getOnlineStatus()).thenReturn(false);
         doNothing().when(mockTelemetryClient).disconnect();
@@ -47,7 +47,7 @@ public class TelemetryDiagnosticControlsTest {
     @Test
     public void checkTransmission_should_disconnect_then_reconnect_when_online_status_is_false() throws Exception {
         // Given
-        var mockTelemetryClient = Mockito.mock(TelemetryClient.class);
+        var mockTelemetryClient = Mockito.mock(ITelemetryClient.class);
 
         doNothing().when(mockTelemetryClient).disconnect();
         when(mockTelemetryClient.receive()).thenReturn("expectedDiagnosticMessage");

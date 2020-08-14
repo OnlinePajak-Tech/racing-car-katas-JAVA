@@ -2,7 +2,7 @@ package tddmicroexercises.telemetrysystem;
 
 import java.util.Random;
 
-public class TelemetryClient
+public class TelemetryClient implements ITelemetryClient
 {
     public static final String DIAGNOSTIC_MESSAGE = "AT#UD";
 
@@ -13,7 +13,7 @@ public class TelemetryClient
 
     public boolean getOnlineStatus()
     {
-        return onlineStatus; 
+        return onlineStatus;
     }
 
     public void connect(String telemetryServerConnectionString)
@@ -79,10 +79,10 @@ public class TelemetryClient
             {
                 message += (char)connectionEventsSimulator.nextInt(40) + 86;
             }
-            
-        } 
+
+        }
         else
-        {                
+        {
             message = diagnosticMessageResult;
             diagnosticMessageResult = "";
         }
