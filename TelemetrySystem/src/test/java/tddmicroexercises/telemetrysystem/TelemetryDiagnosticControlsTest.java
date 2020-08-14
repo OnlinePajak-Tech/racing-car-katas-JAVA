@@ -27,7 +27,7 @@ public class TelemetryDiagnosticControlsTest {
 
         // Then
         Assertions.assertEquals(expectedDiagnosticMessage, control.getDiagnosticInfo());
-        Mockito.verify(mockTelemetryClient).send("AT#UD");
+        verify(mockTelemetryClient).send("AT#UD");
     }
 
     @Test
@@ -41,22 +41,29 @@ public class TelemetryDiagnosticControlsTest {
         var control = new TelemetryDiagnosticControls(mockTelemetryClient);
 
         // When / Then
-        assertThrows(Exception.class, () -> control.checkTransmission(), "Unable to connect.");
+        assertThrows(ConnectionException.class, () -> control.checkTransmission(), "Unable to connect.");
     }
 
     @Test
-    public void checkTransmission_should_disconnect_then_reconnect_when_online_status_is_false() {
+    public void checkTransmission_should_disconnect_then_reconnect_when_online_status_is_false() throws Exception {
         // Given
         var mockTelemetryClient = Mockito.mock(TelemetryClient.class);
 
         doNothing().when(mockTelemetryClient).disconnect();
         when(mockTelemetryClient.receive()).thenReturn("expectedDiagnosticMessage");
-        doReturn(false).doReturn(true).when(mockTelemetryClient)
+        doReturn(false)
+                .doReturn(false)
+                .doReturn(true)
+                .when(mockTelemetryClient)
                 .getOnlineStatus();
         var control = new TelemetryDiagnosticControls(mockTelemetryClient);
 
         // When
+        control.checkTransmission();
 
         // Then
+        verify(mockTelemetryClient).disconnect();
+        verify(mockTelemetryClient, times(2))
+                .connect("*111#");
     }
 }
